@@ -1,23 +1,50 @@
-bodies:  # List of named bodies
+#SERP model with LiDAR
+
+bodies:
+
   - name: base_footprint
-    pose: [0, 0, 0] 
-    type: dynamic  
-    color: [0.5, 0.5, 0.5, 1.0] 
+    enabled: true
+    pose: [0, 0, 0]
+    type: dynamic
+    color: [0, 0, 1, 0.75]
     footprints:
-      - type: polygon 
-        sensor: true
-        points: [[-0.445, -0.29], [-0.445, 0.29], [0.445, 0.29], [0.445, -0.29]]
+      - type: polygon
         density: 0
-        layers: ["static"]
         collision: false
+        sensor: true
+        layers: ["static"]
+        points: [ [-0.117, -0.055],
+                  [-0.022, -0.055],
+                  [-0.022, -0.085],
+                  [0.048, -0.085],
+                  [0.048, 0.085],
+                  [-0.022, 0.085],
+                  [-0.022, 0.055],
+                  [-0.117, 0.055] ]
 
 plugins:
-  - type: DiffDrive 
-    name: diff_drive 
+  - type: DiffDrive
+    name: serp_diff_drive
     body: base_footprint
+    pub_rate: 10
+    twist_sub: cmd_vel
     odom_frame_id: odom
     odom_pub: odom  # topic odom is published on
-    pub_rate: 10
+  
+  - type: ModelTfPublisher
+    name: tf_publisher
+    publish_tf_world: false
+
+   #original lidar
+#  - type: Laser
+#    name: lidar
+#    topic: lidar_scan
+#    body: base_link
+#    range: 30
+#    angle: {min: -3.1415926535897931, max: 3.1415926535897931, increment: 0.03490658503988659}
+#    layers: ["map"]
+#    update_rate: 100
+#    #noise_std_dev: 0.01
   
   - type: Laser
     name: static_laser
@@ -26,9 +53,9 @@ plugins:
     body: base_footprint
     broadcast_tf: true
     origin: [0.0, 0.0, 0.0]
-    range: 10
+    range: 5
     # angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.05235987755}
-    angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.06981317007}
+    angle: {min: -0.78539816339, max: 1.0, increment:   0.39269908169} 
     noise_std_dev: 0.015
     update_rate: 10
     layers: ["static"]
@@ -45,9 +72,4 @@ plugins:
     angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.06981317007}
     noise_std_dev: 0.015
     update_rate: 10
-    layers: ["ped"]
-
-  - type: ModelTfPublisher
-    name: tf_publisher
-    publish_tf_world: false
-    # exclude: ["approx_footprint"]
+    layers: ["static"]

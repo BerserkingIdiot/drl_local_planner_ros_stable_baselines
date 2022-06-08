@@ -20,7 +20,7 @@ import math
 from geometry_msgs.msg import PoseStamped, Twist, Point
 from flatland_msgs.msg import DebugTopicList
 from rosgraph_msgs.msg import Clock
-from pedsim_msgs.msg import AgentStates
+#from pedsim_msgs.msg import AgentStates
 from visualization_msgs.msg import MarkerArray, Marker
 
 class Evaluation():
@@ -54,7 +54,7 @@ class Evaluation():
         self.__new_task_sub = rospy.Subscriber('%s/rl_agent/new_task_started'%self.__NS, Bool, self.__new_task_callback, queue_size=1)
         self.__flatland_topics_sub = rospy.Subscriber("%s/flatland_server/debug/topics"%self.__NS, DebugTopicList, self.__flatland_topic_callback, queue_size=1)
         self.__agent_action_sub = rospy.Subscriber('%s/rl_agent/action'%self.__NS, Twist, self.__trigger_callback)
-        self.__ped_sub = rospy.Subscriber('%s/pedsim_simulator/simulated_agents' % self.__NS, AgentStates, self.__ped_callback)
+        #self.__ped_sub = rospy.Subscriber('%s/pedsim_simulator/simulated_agents' % self.__NS, AgentStates, self.__ped_callback)
         if self.MODE == 1 or self.MODE == 0:
             self.clock_sub = rospy.Subscriber('%s/clock' % self.__NS, Clock, self.__clock_callback)
 
@@ -243,8 +243,9 @@ class Evaluation():
         # Making visible by taking a sim_step
         self.__task_generator.take_sim_step()
 
+    """
     def generate_qualitative_ped_image_rviz(self, results, i_task, i_pos):
-        """
+        
            Generates a dynamic qualitative image of the result of a pedestrian evaluation set.
            The state of the pedestrians and the robot is plotted at position i_pos.
            :param evaluation_set_name: name of the used evaluation set
@@ -252,7 +253,7 @@ class Evaluation():
            :param results_comp: results of second agent
            :param i_task: index of episode in evaluation set that should be displayed
            :param i_pos: position where robot should be displayed.
-           """
+           
 
         if (i_pos >= len(results[i_task]["success"])-4):
             i_pos = len(results[i_task]["success"])-5
@@ -311,6 +312,7 @@ class Evaluation():
                 marker_array.markers[i*3+2].points.append(agent_states_lookahead[i].pose.position)
             # Publish Marker
         self.__agent_pub.publish(marker_array)
+    """
 
     def __rect_robot_collision(self, static_scan_msg, ped_scan_msg, robot_width, robot_height):
         """
@@ -354,6 +356,6 @@ class Evaluation():
     def __clock_callback(self, data):
         self.__clock = data.clock
 
-    def __ped_callback(self, data):
-        self.__recent_agent_states = data.agent_states
+    #def __ped_callback(self, data):
+    #    self.__recent_agent_states = data.agent_states
 

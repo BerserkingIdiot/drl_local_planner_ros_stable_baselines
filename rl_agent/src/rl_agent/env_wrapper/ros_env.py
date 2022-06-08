@@ -95,6 +95,7 @@ class RosEnvAbs(gym.Env):
 
         # Publisher
         self.__agent_action_pub = rospy.Publisher('%s/rl_agent/action' % (self.NS), Twist, queue_size=1)
+        self.__agent_cmd_vel_pub = rospy.Publisher('%s/cmd_vel' % (self.NS), Twist, queue_size=1)
 
         # Sleeping so that py-Publisher has time to setup!
         time.sleep(2)
@@ -108,20 +109,25 @@ class RosEnvAbs(gym.Env):
         # Publishing action
         # start = time.time()
         action = self.get_cmd_vel_(action)
+        if self.MODE == "exec" :
+            self.__agent_cmd_vel_pub.publish(action)
         self.__agent_action_pub.publish(action)
         # print("publish cmd_vel: %f"%(time.time() - start))
 
         # waiting for robot-cycle to end
         begin = time.time()
-        while not self.__trigger:
-            if self.MODE == "train" or self.MODE == "eval":
-                # Detecting if pipeline is broke --> resetting
-                if (time.time() - begin) > 20.0:
-                    rospy.logerr("%s, step(): Timeout while waiting for local planner." % (self.NS))
-                    self.reset()
-                    self.__agent_action_pub.publish(action)
-                    begin = time.time()
-            time.sleep(0.00001)
+        if self.MODE == "exec" :
+            time.sleep(0.00005)
+        else :
+            while not self.__trigger:
+                if self.MODE == "train" or self.MODE == "eval":
+                    # Detecting if pipeline is broke --> resetting
+                    if (time.time() - begin) > 20.0:
+                        rospy.logerr("%s, step(): Timeout while waiting for local planner." % (self.NS))
+                        self.reset()
+                        self.__agent_action_pub.publish(action)
+                        begin = time.time()
+                time.sleep(0.00001)
         self.__trigger = False
         # print("waiting for BaseLocalPlanner: %f"%(time.time() - begin))
 
@@ -167,19 +173,23 @@ class RosEnvAbs(gym.Env):
         """
         if (self.MODE == "train" or self.MODE == "eval"):
             if self.__task_mode == "ped":
-                self.__task_generator.set_random_ped_task()
+                print("Don't use" + self.__task_mode + "mode")
+                #self.__task_generator.set_random_ped_task()
             elif self.__task_mode == "ped_short":
-                self.__task_generator.set_random_short_ped_task()
+                #self.__task_generator.set_random_short_ped_task()
+                print("Don't use" + self.__task_mode + "mode")
             elif self.__task_mode == "static":
                 self.__task_generator.set_random_static_task()
             elif self.__task_mode == "toggle_ped_static":
-                if self.__toggle:
-                    self.__task_generator.set_random_static_task()
-                else:
-                    self.__task_generator.set_random_ped_task()
-                self.__toggle = (not self.__toggle)
+                print("Don't use" + self.__task_mode + "mode")
+                #if self.__toggle:
+                #    self.__task_generator.set_random_static_task()
+                #else:
+                #    self.__task_generator.set_random_ped_task()
+                #self.__toggle = (not self.__toggle)
             elif self.__task_mode == "ped_static":
-                self.__task_generator.set_random_static_ped_task()
+                print("Don't use" + self.__task_mode + "mode")
+                #self.__task_generator.set_random_static_ped_task()
 
 
     def reset(self):
@@ -236,8 +246,8 @@ class RosEnvAbs(gym.Env):
         waypoints in robot frame.
         """
         [self.static_scan_, self.ped_scan_, self.merged_scan_, self.input_img_, self.wp_, self.twist_, self.__transformed_goal] = self.__state_collector.get_state()
-        if(self.debug_):
-            self.debugger_.show_wp(self.wp_)
+        #if(self.debug_):
+        #    self.debugger_.show_wp(self.wp_)
 
     def __compute_reward(self, action):
         """
@@ -286,8 +296,8 @@ class RosEnvAbs(gym.Env):
         else:
             max_iteration = 650
 
-        if dist_to_goal < self.GOAL_RADIUS:
-            return [True, 1]
+        #if dist_to_goal < self.GOAL_RADIUS:
+        #    return [True, 1]
         if  min_obstacle_dist < self.ROBOT_RADIUS:
             return [True, 2]
         elif reward < -5:

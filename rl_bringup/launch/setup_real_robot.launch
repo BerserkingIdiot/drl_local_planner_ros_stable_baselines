@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="use_sim_time" value="false"/>
+    <arg name="ns" default=""/>
+    <arg name="rl_params" default="rl_params_scan"/>
+
+    <arg name="update_rate" default="10000"/>
+    <!-- <arg name="update_rate" default="300"/> -->
+    
+	<arg name="map_path" default="$(find flatland_setup)/maps/map_middle_complexity"/>
+
+    <group ns="$(arg ns)" if="$(eval ns != '')">
+
+        <rosparam file="$(find rl_bringup)/config/$(arg rl_params).yaml" command="load" />
+        <rosparam file="$(find rl_bringup)/config/rl_common.yaml" command="load" />
+        
+        <!-- Start navigation stack-->
+        <include file="$(find rl_bringup)/launch/sub_launch/navigation_real_robot.launch">
+            <arg name="ns" value="$(arg ns)" />
+            <arg name="map_path" value="$(arg map_path)" />
+        </include>
+
+        <!-- RL infrastructure-->
+        <node pkg="rl_agent" type="laser_scan_merger" name="laser_scan_merger" output="screen">
+            <!--<remap from="/tf" to="/$(arg ns)/tf"/>
+            <remap from="/clock" to="/$(arg ns)/clock"/>-->
+        </node>	
+
+        <node pkg="rl_agent" type="tf_python" name="tf_python" output="screen">
+            <!--<remap from="/tf" to="/$(arg ns)/tf"/>
+            <remap from="/clock" to="/$(arg ns)/clock"/>-->
+        </node>	
+
+    </group>
+
+</launch>

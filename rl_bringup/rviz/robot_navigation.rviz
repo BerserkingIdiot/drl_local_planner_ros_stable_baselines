@@ -35,9 +35,9 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: static_laser
-  - Class: rviz_plugin/Teleop
+  - Class: rviz_plugin_tutorials/Teleop
     Name: Teleop
-  - Class: rviz_plugin/Teleop
+  - Class: rviz_plugin_tutorials/Teleop
     Name: Teleop
 Toolbars:
   toolButtonStyle: 2
@@ -368,72 +368,72 @@ Visualization Manager:
       Displays:
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: flatland_server/debug/model/stat_obj_0
-          Name: stat_obj_0
+          Marker Topic: /sim1/flatland_server/debug/model/wagon_0
+          Name: wagon_0
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_2
-          Name: sta_obj_2
+          Marker Topic: /sim1/flatland_server/debug/model/wagon_1
+          Name: wagon_1
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_5
-          Name: stat_obj_5
+          Marker Topic: /sim1/flatland_server/debug/model/wagon_2
+          Name: wagon_2
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_9
-          Name: stat_obj_9
+          Marker Topic: /sim1/flatland_server/debug/model/cylinder_0
+          Name: cylinder_0
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_8
-          Name: stat_obj_8
+          Marker Topic: /sim1/flatland_server/debug/model/cylinder_1
+          Name: cylinder_1
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_7
-          Name: stat_obj_7
+          Marker Topic: /sim1/flatland_server/debug/model/cylinder_2
+          Name: cylinder_2
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_6
-          Name: stat_obj_6
+          Marker Topic: /sim1/flatland_server/debug/model/palett_0
+          Name: palett_0
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_4
-          Name: stat_obj_4
+          Marker Topic: /sim1/flatland_server/debug/model/palett_1
+          Name: palett_1
           Namespaces:
             {}
           Queue Size: 1
           Value: true
         - Class: rviz/MarkerArray
           Enabled: true
-          Marker Topic: /flatland_server/debug/model/stat_obj_3
-          Name: stat_obj_3
+          Marker Topic: /sim1/flatland_server/debug/model/palett_2
+          Name: palett_2
           Namespaces:
             {}
           Queue Size: 1

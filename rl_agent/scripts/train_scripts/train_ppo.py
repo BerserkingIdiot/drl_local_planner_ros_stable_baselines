@@ -232,8 +232,8 @@ if __name__ == '__main__':
 
         num_envs = 1
         stage = 0
-        agent_name = "ppo2_foo"
-        robot_radius = 0.5
+        agent_name = "ppo2_simple_reactive"
+        robot_radius = 0.2
 
         record_processes = []
         if record_evaluation_data:
@@ -250,7 +250,7 @@ if __name__ == '__main__':
                          ent_coef=0.005,
                          learning_rate=0.00025,
                          cliprange=0.2,
-                         total_timesteps=10000000,
+                         total_timesteps=1000000,
                          policy="CNN1DPolicy_multi_input",
                          num_envs=num_envs,
                          nminibatches=1,
@@ -262,8 +262,8 @@ if __name__ == '__main__':
                          disc_action_space=False,
                          robot_radius = robot_radius,
                          stage=stage,
-                         pretrained_model_name="ppo2_foo",
-                         task_mode="ped")
+                         pretrained_model_name="ppo2_simple_reactive",
+                         task_mode="static")
 
         for p in record_processes:
             p.terminate()

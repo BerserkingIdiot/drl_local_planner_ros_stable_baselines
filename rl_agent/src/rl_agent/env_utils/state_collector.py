@@ -49,7 +49,7 @@ class StateCollector():
         # Subscriber
         self.wp_sub_ = rospy.Subscriber("%s/wp" % (self.__ns), Waypoint, self.__wp_callback, queue_size=1)
 
-        if ["train", "eval"].__contains__(self.__mode):
+        if ["train", "eval","exec"].__contains__(self.__mode):
             # Info only avaible during evaluation and training
             self.wp_sub_reached_ = rospy.Subscriber("%s/wp_reached" % (self.__ns), Waypoint, self.__wp_reached_callback, queue_size=1)
 
@@ -83,7 +83,7 @@ class StateCollector():
                     twist of the robot,
                     goal position in robot frame
         """
-        if ["train", "eval"].__contains__(self.__mode):
+        if ["train", "eval","exec"].__contains__(self.__mode):
 
             # Fully synchronized --> slows down simulation speed!
             # resp = self.__sim_in_step(True)
@@ -101,15 +101,16 @@ class StateCollector():
             # print("__remove_nans_from_scan: %f" % (time.time() - start))
 
             # start = time.time()
-            merged_scan = LaserScan()
-            merged_scan.header.frame_id = "base_footprint"
-            merged_scan.header.stamp = static_scan_msg.header.stamp
-            merged_scan.ranges = np.minimum(static_scan_msg.ranges, ped_scan_msg.ranges)
-            merged_scan.range_max = static_scan_msg.range_max
-            merged_scan.range_min = static_scan_msg.range_min
-            merged_scan.angle_increment = static_scan_msg.angle_increment
-            merged_scan.angle_min = static_scan_msg.angle_min
-            merged_scan.angle_max = static_scan_msg.angle_max
+            merged_scan = static_scan_msg
+            #merged_scan = LaserScan()
+            #merged_scan.header.frame_id = "base_footprint"
+            #merged_scan.header.stamp = static_scan_msg.header.stamp
+            #merged_scan.ranges = np.minimum(static_scan_msg.ranges, ped_scan_msg.ranges)
+            #merged_scan.range_max = static_scan_msg.range_max
+            #merged_scan.range_min = static_scan_msg.range_min
+            #merged_scan.angle_increment = static_scan_msg.angle_increment
+            #merged_scan.angle_min = static_scan_msg.angle_min
+            #merged_scan.angle_max = static_scan_msg.angle_max
             # print("merge_scan: %f" % (time.time() - start))
             # start = time.time()
             wp_cp = copy.deepcopy(self.__wps)

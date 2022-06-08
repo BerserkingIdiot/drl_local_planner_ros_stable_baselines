@@ -7,7 +7,7 @@ rl_agent:
 
   update_frequency: 10
   goal_theshold: 0.6
-  num_of_wps: 8
+  num_of_wps: 0
   look_ahead_distance: 1.5
   wp_reached_dist: 0.2
 

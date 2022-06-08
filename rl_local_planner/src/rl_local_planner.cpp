@@ -91,13 +91,13 @@ namespace rl_local_planner {
 		srv.request.path.poses = orig_plan;
 		if (!set_path_service_.call(srv)){
 			ROS_ERROR("Failed set path on waypoint generator.");
- 			return false;
+ 			//return false;
 		}
 		return true;
   	} //setPlan
 
 	bool RLLocalPlanner::computeVelocityCommands(geometry_msgs::Twist& cmd_vel){
-		// ROS_WARN("Velocity command");
+		//ROS_WARN("Velocity command");
 		// Trigger agent to compute next action
 		std_msgs::Bool msg;
 		msg.data = true;

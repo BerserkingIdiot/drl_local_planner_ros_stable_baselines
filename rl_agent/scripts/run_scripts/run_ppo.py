@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 '''
     @name:      run_ppo.py
     @brief:     Trained agent is loaded and executed.
@@ -53,9 +52,12 @@ def load_train_env(ns, state_collector, robot_radius, rew_fnc, num_stacks,
             env_temp = RosEnvDiscImgVel
         else:
             env_temp = RosEnvContImgVel
+    else:
+        env_temp = RosEnvContRaw
+        print("You really buggered this one up, eh?")
 
 
-    env_raw = DummyVecEnv([lambda: env_temp(ns, state_collector, stack_offset, num_stacks, robot_radius, rew_fnc, debug, rl_mode, task_mode)])
+    env_raw = DummyVecEnv([lambda envyboi=env_temp: envyboi(ns, state_collector, stack_offset, num_stacks, robot_radius, rew_fnc, debug, rl_mode, task_mode)])
 
     if normalize:
         env = VecNormalize(env_raw, training=True, norm_obs=True, norm_reward=False, clip_obs=100.0, clip_reward=10.0,

@@ -33,8 +33,8 @@ def laser_cnn_multi_input(state, **kwargs):
 
     kwargs_conv = {}
     activ = tf.nn.relu
-    layer_1 = activ(conv1d(scan, 'c1d_1', n_filters=32, filter_size=5, stride=2, init_scale=np.sqrt(2), **kwargs_conv))
-    layer_2 = activ(conv1d(layer_1, 'c1d_2', n_filters=64, filter_size=3, stride=2, init_scale=np.sqrt(2), **kwargs_conv))
+    layer_1 = activ(conv1d(scan, 'c1d_1', n_filters=32, filter_size=3, stride=2, init_scale=np.sqrt(2), **kwargs_conv))
+    layer_2 = activ(conv1d(layer_1, 'c1d_2', n_filters=64, filter_size=1, stride=2, init_scale=np.sqrt(2), **kwargs_conv))
     layer_2 = conv_to_fc(layer_2)
     layer_3 = activ(linear(layer_2, 'fc1', n_hidden=256, init_scale=np.sqrt(2)))
     temp = tf.concat([layer_3, wps], 1)

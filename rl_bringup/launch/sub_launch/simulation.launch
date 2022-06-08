@@ -13,8 +13,10 @@
     </include>
 
     <!-- Launch light pedsim -->
+    <!--
     <include file="$(find rl_bringup)/launch/sub_launch/pedestrians_only.launch">
         <arg name="ns" value="$(arg ns)" />
         <arg name="map_path" value="$(arg map_path)"/>
     </include>
+    -->
 </launch>

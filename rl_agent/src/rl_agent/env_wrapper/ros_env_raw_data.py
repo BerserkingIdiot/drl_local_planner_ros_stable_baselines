@@ -42,9 +42,9 @@ class RosEnvRaw(RosEnvAbs):
         state[0, 0:self.__scan_size, 0] = self.merged_scan_.ranges
 
         # add goal position
-        wp_index = self.STATE_SIZE[1] - num_of_wps * 2
-        for i in range(num_of_wps):
-            state[0, (wp_index + i*2):(wp_index + i*2 + 2),0] = [waypoint.points[i].x, waypoint.points[i].y]
+        #wp_index = self.STATE_SIZE[1] - num_of_wps * 2
+        #for i in range(num_of_wps):
+        #    state[0, (wp_index + i*2):(wp_index + i*2 + 2),0] = [waypoint.points[i].x, waypoint.points[i].y]
 
         # Discretize to a resolution of 5cm.
         state = np.round(np.divide(state, 0.05))*0.05

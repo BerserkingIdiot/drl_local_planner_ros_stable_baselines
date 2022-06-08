@@ -20,6 +20,7 @@ class RewardContainer():
     def __init__(self, ns, robot_radius, goal_radius, max_trans_vel):
         self.old_wps = []
         self.old_closest_wp = 0
+        self.old_dist_to_goal = 0
         self.__update_rate = 1/rospy.get_param("%s/rl_agent/update_frequency"%ns)
 
         self.__robot_radius = robot_radius
@@ -37,6 +38,7 @@ class RewardContainer():
         for i in range(num_wp):
             self.old_wps[i] = self.mean_sqare_dist_(wps[i].x, wps[i].y)
         self.old_closest_wp = 0
+        self.old_dist_to_goal = 0
 
     def rew_func_1(self, scan, wps, transformed_goal):
         '''
@@ -80,22 +82,37 @@ class RewardContainer():
         if (abs(twist.twist.linear.x) < 0.001 and abs(twist.twist.angular.z) > 0.001):
             standing_still_punish = -0.01
 
-        wp_approached_rew = self.__get_wp_approached(wps, 5.5, 4.5, 0.0)
+        #wp_approached_rew = self.__get_wp_approached(wps, 5.5, 4.5, 0.0)
 
         # Did the agent bump into an obstacle?
-        obstacle_punish_static = self.__get_obstacle_punish(static_scan.ranges, 7, self.__robot_radius)
-        obstacle_punish_ped = 0
-        if (self.__still_time < 0.8):
-            obstacle_punish_ped = self.__get_obstacle_punish(ped_scan_msg.ranges, 7, 0.85)
-        obstacle_punish = min(obstacle_punish_ped, obstacle_punish_static)
+        obstacle_punish_static = self.__get_obstacle_punish(ped_scan_msg.ranges, 7, self.__robot_radius)
+        #obstacle_punish_ped = 0
+        #if (self.__still_time < 0.8):
+        #    obstacle_punish_ped = self.__get_obstacle_punish(ped_scan_msg.ranges, 7, 0.85)
+        obstacle_punish = obstacle_punish_static #min(obstacle_punish_ped, obstacle_punish_static)
 
         # Did the agent reached the goal?
-        goal_reached_rew = self.__get_goal_reached_rew(transformed_goal, 10)
+        #goal_reached_rew = self.__get_goal_reached_rew(transformed_goal, 10)
 
-        rew = (wp_approached_rew + obstacle_punish + goal_reached_rew + standing_still_punish)
+        # Did the agent move away from the starting position?
+        dist_to_goal = self.mean_sqare_dist_(transformed_goal.position.x, transformed_goal.position.y)
+        move_away_rew = 0
+        diff = (dist_to_goal - self.old_dist_to_goal)
+        if (abs(diff) > self.__max_trans_vel*self.__update_rate*4):
+            diff = 0
+        if (diff < 0):
+            move_away_rew = 2.5 * diff
+        else:
+            move_away_rew = 2 * diff
+    
+        #move_away_rew = dist_to_goal * 0.01
+        self.old_dist_to_goal = dist_to_goal
+
+
+        rew = (obstacle_punish + standing_still_punish + move_away_rew)#(wp_approached_rew + obstacle_punish + goal_reached_rew + standing_still_punish)
         if (rew < -2.5):
             test = "debug"
-        rew = self.__check_reward(rew, obstacle_punish, goal_reached_rew, 2.5)
+        rew = self.__check_reward(rew, obstacle_punish, 1, 2.5)
         return rew
 
     def rew_func_2_1(self, static_scan, ped_scan_msg, wps, twist, transformed_goal):
