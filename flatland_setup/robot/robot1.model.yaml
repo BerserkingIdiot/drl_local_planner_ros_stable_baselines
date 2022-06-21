@@ -53,7 +53,7 @@ plugins:
     body: base_footprint
     broadcast_tf: true
     origin: [0.0, 0.0, 0.0]
-    range: 5
+    range: 2
     # angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.05235987755}
     angle: {min: -0.78539816339, max: 1.0, increment:   0.39269908169} 
     noise_std_dev: 0.015
@@ -67,7 +67,7 @@ plugins:
     body: base_footprint
     broadcast_tf: true
     origin: [0.0, 0.0, 0.0]
-    range: 10
+    range: 5
     # angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.05235987755}
     angle: {min: -3.14159265359, max: 3.14159265359, increment: 0.06981317007}
     noise_std_dev: 0.015

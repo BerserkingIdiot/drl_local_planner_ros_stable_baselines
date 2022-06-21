@@ -85,7 +85,7 @@ class RewardContainer():
         #wp_approached_rew = self.__get_wp_approached(wps, 5.5, 4.5, 0.0)
 
         # Did the agent bump into an obstacle?
-        obstacle_punish_static = self.__get_obstacle_punish(ped_scan_msg.ranges, 7, self.__robot_radius)
+        obstacle_punish_static = self.__get_obstacle_punish(static_scan.ranges, 7, self.__robot_radius)
         #obstacle_punish_ped = 0
         #if (self.__still_time < 0.8):
         #    obstacle_punish_ped = self.__get_obstacle_punish(ped_scan_msg.ranges, 7, 0.85)

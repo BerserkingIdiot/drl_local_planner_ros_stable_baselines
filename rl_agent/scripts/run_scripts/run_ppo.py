@@ -109,6 +109,10 @@ def run_ppo(config, state_collector, agent_name ="ppo_99_8507750", policy ="CnnP
     while True:
         #Determining action vor given observation
         action, _states = model.predict(obs)
+        #print('obs is:\n')
+        #print(obs)
+        #print('action is:\n')
+        #print(action)
 
         # Clipping actions
         if not disc_action_space:

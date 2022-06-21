@@ -35,7 +35,7 @@ class RosEnvContRaw(RosEnvRaw):
         state_size_t = rospy.get_param("%s/rl_agent/scan_size"% ns) + rospy.get_param("%s/rl_agent/num_of_wps"%ns)*2
         state_size = (1, state_size_t, 1)
         observation_space = spaces.Box(low=0, high=6, shape=state_size, dtype=np.float)
-        action_space = spaces.Box(low=np.array([0.0, -0.5]), high=np.array([0.2, 0.5]), dtype=np.float)
+        action_space = spaces.Box(low=np.array([0.0, -1.5]), high=np.array([0.2, 1.5]), dtype=np.float)
 
         super(RosEnvContRaw, self).__init__(ns, state_collector, execution_mode, task_mode, state_size, observation_space, stack_offset, [], action_space, debug, GOAL_RADIUS, WAYPOINT_RADIUS, robot_radius, reward_fnc)
 

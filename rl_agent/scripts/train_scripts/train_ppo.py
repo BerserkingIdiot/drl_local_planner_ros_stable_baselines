@@ -250,7 +250,7 @@ if __name__ == '__main__':
                          ent_coef=0.005,
                          learning_rate=0.00025,
                          cliprange=0.2,
-                         total_timesteps=1000000,
+                         total_timesteps=2000000,
                          policy="CNN1DPolicy_multi_input",
                          num_envs=num_envs,
                          nminibatches=1,
