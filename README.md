@@ -42,7 +42,7 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
 
 4. Setup virtual environment to be able to use python3 with ROS
    ```
-    virtualenv <path_to_venv>/venv_p3 --python=python3
+    virtualenv <path_to_venv>/venv_p3 --python=python3.7
     source <path_to_venv>/venv_p3/bin/activate
     <path_to_venv>/venv_p3/bin/pip install \
         pyyaml \
