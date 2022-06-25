@@ -56,7 +56,6 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
         mpi4py \
         matplotlib
     <path_to_venv>/venv_p3/bin/pip install -r src/drl_local_planner_ros_stable_baselines/requirements.txt
-    cd <path_to_catkin_ws>/src/drl_local_planner_forks/stable_baselines/
     <path_to_venv>/venv_p3/bin/pip install -e <path_to_catkin_ws>/src/drl_local_planner_forks/stable-baselines/
     ```
 5. Set system-relevant variables 
