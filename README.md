@@ -50,11 +50,12 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
         catkin_pkg \
         exception \
         numpy \
-        tensorflow=="1.13.1" \
+        tensorflow \
         gym \
         pyquaternion \ 
         mpi4py \
         matplotlib
+    cd <path_to_catkin_ws>/src/drl_local_planner_ros_stable_baselines/
     <path_to_venv>/venv_p3/bin/pip install -r requirements.txt
     cd <path_to_catkin_ws>/src/drl_local_planner_forks/stable_baselines/
     <path_to_venv>/venv_p3/bin/pip install -e <path_to_catkin_ws>/src/drl_local_planner_forks/stable-baselines/
