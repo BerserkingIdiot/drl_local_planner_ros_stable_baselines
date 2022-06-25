@@ -44,6 +44,7 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
    ```
     virtualenv <path_to_venv>/venv_p3 --python=python3.7
     source <path_to_venv>/venv_p3/bin/activate
+    python -m ensurepip --upgrade
     <path_to_venv>/venv_p3/bin/pip install \
         pyyaml \
         rospkg \
