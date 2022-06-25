@@ -82,7 +82,7 @@ Note: All commands from here on are formatted to be run from the root of your wo
     ```
     * Open fourth terminal (DRL-agent):
      ```
-    source <path_to_venv>/bin/activate 
+    source <path_to_venv>/venv_p3/bin/activate 
     python src/drl_local_planner_ros_stable_baselines/rl_agent/scripts/train_scripts/train_ppo.py
     ```
 2. Execute self-trained ppo-agent
