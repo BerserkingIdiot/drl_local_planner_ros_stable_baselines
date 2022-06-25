@@ -13,7 +13,6 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
 2. Install additional packages
     ```
     sudo apt-get update && sudo apt-get install -y \
-    libqt4-dev \
     libopencv-dev \
     liblua5.2-dev \
     virtualenv \
