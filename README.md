@@ -28,7 +28,7 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
     * First, lone this repository in your src-folder of your catkin workspace with:
     ```
     cd <path_to_catkin_ws>/src/
-    git clone git@github.com:BerserkingIdiot/drl_local_planner_ros_stable_baselines.git
+    git clone https://github.com/BerserkingIdiot/drl_local_planner_ros_stable_baselines.git
     ```
     * Then do the following:
     ```
