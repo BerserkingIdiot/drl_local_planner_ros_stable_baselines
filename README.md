@@ -65,7 +65,9 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
 
 # Training and running your first agent:
 
-In this section, you'll be able to train an agent with the default parameters, and subsequently run your agent to test its capabilities. Notice that even with the exact same parameters, there slightly different outcomes from separate training runs!
+In this section, you'll be able to train an agent with the default parameters, and subsequently run your agent to test its capabilities. Notice that even with the exact same parameters, there are slightly different outcomes from separate training runs!
+
+Note: All commands from here on are formatted to be run from the root of your workspace folder, and every terminal is expected to have the ROS environment set up (sourced the setup.bash files).
 
 1. Train agent
     * Open first terminal (roscore): 
