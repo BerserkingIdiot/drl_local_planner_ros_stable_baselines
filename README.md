@@ -55,7 +55,7 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
         catkin_pkg \
         exception \
         numpy \
-        tensorflow \
+        tensorflow=="1.15" \
         gym \
         pyquaternion \ 
         mpi4py \
