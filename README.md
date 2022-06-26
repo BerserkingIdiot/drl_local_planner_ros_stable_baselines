@@ -105,7 +105,7 @@ Note: All commands from here on are formatted to be run from the root of your wo
     * Open fourth terminal:
     ```
     source <path_to_venv>/venv_p3/bin/activate 
-    python src/drl_local_planner_ros_stable_baselines/rl_agent/scripts/train_scripts/train_ppo.py ppo2_simple_reactive CNN1DPolicy_multi_input train 1 0 0 static 3
+    python src/drl_local_planner_ros_stable_baselines/rl_agent/scripts/train_scripts/run_ppo.py ppo2_simple_reactive CNN1DPolicy_multi_input train 1 0 0 static 3
     ```
 # Tuning and improving your agent:
 
