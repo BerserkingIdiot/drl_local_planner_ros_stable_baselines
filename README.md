@@ -17,10 +17,14 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
     liblua5.2-dev \
     virtualenv \
     screen \
-    python3-dev \
     ros-noetic-tf2-geometry-msgs \
     ros-noetic-navigation \
     ros-noetic-rviz 
+    sudo apt install software-properties-common -y
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt update
+    sudo apt install python3.7-dev -y
+    sudo apt install python3.7-venv -y
     ```
 
 3. Setup repository: 
