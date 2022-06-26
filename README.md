@@ -49,7 +49,7 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
     virtualenv <path_to_venv>/venv_p3 --python=python3.7
     source <path_to_venv>/venv_p3/bin/activate
     python -m ensurepip --upgrade
-    <path_to_venv>/venv_p3/bin/pip install \
+    <path_to_venv>/venv_p3/bin/pip3 install \
         pyyaml \
         rospkg \
         catkin_pkg \
@@ -60,8 +60,8 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
         pyquaternion \ 
         mpi4py \
         matplotlib
-    <path_to_venv>/venv_p3/bin/pip install -r src/drl_local_planner_ros_stable_baselines/requirements.txt
-    <path_to_venv>/venv_p3/bin/pip install -e <path_to_catkin_ws>/src/drl_local_planner_forks/stable-baselines/
+    <path_to_venv>/venv_p3/bin/pip3 install -r src/drl_local_planner_ros_stable_baselines/requirements.txt
+    <path_to_venv>/venv_p3/bin/pip3 install -e <path_to_catkin_ws>/src/drl_local_planner_forks/stable-baselines/
     ```
 5. Set system-relevant variables 
     * Modify all relevant paths in rl_bringup/config/path_config.ini
