@@ -19,7 +19,8 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
     screen \
     ros-noetic-tf2-geometry-msgs \
     ros-noetic-navigation \
-    ros-noetic-rviz 
+    ros-noetic-rviz \
+    python3-rosinstall
     sudo apt install software-properties-common -y
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt update
@@ -69,7 +70,12 @@ This document is by no means a complete guide on Reinforcement Learning with ROS
 
 In this section, you'll be able to train an agent with the default parameters, and subsequently run your agent to test its capabilities. Notice that even with the exact same parameters, there are slightly different outcomes from separate training runs!
 
-Note: All commands from here on are formatted to be run from the root of your workspace folder, and every terminal is expected to have the ROS environment set up (sourced the setup.bash files).
+**Important Note**: All commands from here on are formatted to be run from the root of your workspace folder, and every terminal is expected to have the ROS environment set up (sourced the setup.bash files). For this, do:
+
+```
+source /opt/ros/noetic/setup.bash
+source devel/setup.bash
+```
 
 1. Train agent
     * Open first terminal (roscore): 
